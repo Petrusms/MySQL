@@ -1,3 +1,4 @@
+drop database clinica;
 create database clinica;
 use clinica;
 
@@ -9,7 +10,7 @@ create table medico(
 	cidade varchar(30) not null,
 	especialidade varchar(50) not null
 );
-show databases;
+
 create table paciente(
 	codpac int primary key,
 	nomepac varchar(40) not null,
@@ -17,3 +18,14 @@ create table paciente(
 	cpf char(11),
 	cidade varchar(30) not null
 );
+
+create table consulta(
+	codmed int not null,
+    codpac int not null,
+    data_consulta date not null,
+    hora time not null,
+    primary key(codmed, codpac),
+    foreign key(codmed) references medico(codmed),
+    foreign key(codpac) references paciente(codpac)
+);
+show databases;
