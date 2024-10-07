@@ -1,0 +1,19 @@
+create database clinica;
+use clinica;
+
+create table medico(
+	codmed int primary key,
+	nomemed varchar(40) not null,
+	datanasc date not null,
+	cpf char(11),
+	cidade varchar(30) not null,
+	especialidade varchar(50) not null
+);
+show databases;
+create table paciente(
+	codpac int primary key,
+	nomepac varchar(40) not null,
+	datanasc date not null,
+	cpf char(11),
+	cidade varchar(30) not null
+);
