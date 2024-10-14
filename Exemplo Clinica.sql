@@ -46,3 +46,19 @@ values(6,'Luciana','1975/04/25','010010111','Rio Branco','Ortopedia');
 
 describe medico;
 select *from medico;
+
+insert into paciente
+values(1,'Ana','1978/09/13','2201005000','Florianopolis');
+insert into paciente
+values(2,'Paulo','1940/03/17','2201005001','Porto Velho');
+insert into paciente
+values(3,'Lucia','1957/06/24','2201005002','Blumenau');
+insert into paciente
+values(4,'Carlos','2001/10/08','2201005003','Joinville');
+insert into paciente
+values(5,'Luiz','2000/08/14','2201005004','Fortaleza');
+insert into paciente
+values(6,'Mauricio','1980/01/01','2201005005','Rio Branco');
+
+describe paciente;
+select *from paciente;
