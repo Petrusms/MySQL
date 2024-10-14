@@ -40,7 +40,7 @@ values(3,'Pedro','1956/11/25','10001101000','Porto Velho','Pediatria');
 insert into medico
 values(4,'Carlos','1985/02/07','1111010000','Joinville','Ortopedia');
 insert into medico
-values(5,'Marcia','1945/08/15','1011010000','Fortaleza','Ortopedia');
+values(5,'Marcia','1945/08/15','1011010000','Fortaleza','Neurologia');
 insert into medico
 values(6,'Luciana','1975/04/25','010010111','Rio Branco','Ortopedia');
 
