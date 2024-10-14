@@ -62,3 +62,12 @@ values(6,'Mauricio','1980/01/01','2201005005','Rio Branco');
 
 describe paciente;
 select *from paciente;
+
+insert consulta
+values(1,1,'2021/05/12','14:00');
+insert consulta
+values(1,4,'2021/05/13','10:00');
+
+describe consulta;
+select *from consulta;
+
