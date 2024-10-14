@@ -33,6 +33,16 @@ show databases;
 
 insert into medico
 values(1,'João','1984/06/28','10000100000','Florianopolis','Ortopedia');
+insert into medico
+values(2,'Maria','1970/07/13','11100100000','Blumenau','Traumotologia');
+insert into medico
+values(3,'Pedro','1956/11/25','10001101000','Porto Velho','Pediatria');
+insert into medico
+values(4,'Carlos','1985/02/07','1111010000','Joinville','Ortopedia');
+insert into medico
+values(5,'Marcia','1945/08/15','1011010000','Fortaleza','Ortopedia');
+insert into medico
+values(6,'Luciana','1975/04/25','010010111','Rio Branco','Ortopedia');
 
 describe medico;
 select *from medico;
