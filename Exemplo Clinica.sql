@@ -28,4 +28,11 @@ create table consulta(
     foreign key(codmed) references medico(codmed),
     foreign key(codpac) references paciente(codpac)
 );
+use clinica;
 show databases;
+
+insert into medico
+values(1,'João','1984/06/28','10000100000','Florianopolis','Ortopedia');
+
+describe medico;
+select *from medico;
