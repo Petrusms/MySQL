@@ -1,0 +1,103 @@
+CREATE DATABASE loja;
+USE loja;
+
+CREATE TABLE clientes (
+    id INT PRIMARY KEY,
+    nome VARCHAR(40) NOT NULL,
+    cidade VARCHAR(50)
+);
+
+CREATE TABLE pedidos (
+    id INT PRIMARY KEY,
+    valor FLOAT,
+    cliente_id INT,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+CREATE TABLE produtos (
+    produto_id INT PRIMARY KEY,
+    nome VARCHAR(50),
+    categoria VARCHAR(50),
+    preco FLOAT
+);
+
+CREATE TABLE vendas (
+    venda_id INT PRIMARY KEY,
+    cliente_id INT,
+    produto_id INT,
+    data_venda DATE,
+    quantidade INT,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id), 
+    FOREIGN KEY (produto_id) REFERENCES produtos(produto_id)
+);
+
+CREATE TABLE fornecedor (
+    fornecedor_id INT PRIMARY KEY,
+    nome VARCHAR(50),
+    cidade VARCHAR(50)
+);
+
+CREATE TABLE estoque (
+    produto_id INT,
+    fornecedor_id INT,
+    quantidade_disponivel INT,
+    FOREIGN KEY (produto_id) REFERENCES produtos(produto_id),
+    FOREIGN KEY (fornecedor_id) REFERENCES fornecedor(fornecedor_id)
+);
+
+INSERT INTO produtos VALUES
+(1, 'notebook', 'eletrônicos', 3000.0),
+(2, 'smartphone', 'eletrônicos', 2000.0),
+(3, 'fone de ouvido', 'acessórios', 150.0),
+(4, 'mochila', 'acessórios', 200.0);
+
+INSERT INTO clientes (id, nome, cidade)
+VALUES 
+(1, 'Ana', 'SP'),
+(2, 'Bruno', 'RJ'),
+(3, 'Carla', 'CWB'),
+(4, 'Daniel', 'PE');
+
+INSERT INTO pedidos (id, valor, cliente_id)
+VALUES 
+(101, 300, 1),
+(102, 400, 2),
+(103, 1000, 2);
+
+INSERT INTO fornecedor VALUES
+(101, 'Tech Supplies', 'São Paulo'),
+(102, 'Mobile World', 'Rio de Janeiro'),
+(103, 'Audio Store', 'Belo Horizonte');
+
+INSERT INTO vendas VALUES
+(201, 1, 1, '2025-01-10', 1),
+(202, 2, 2, '2025-01-11', 1), 
+(203, 3, 4, '2025-01-15', 1);
+-- Removido o cliente_id 5 pois não existe na tabela clientes e não está funcionado
+-- (204, 5, 1, '2025-01-20', 1); 
+
+INSERT INTO estoque VALUES
+(1, 101, 10),
+(2, 102, 20),
+(3, 103, 15);
+
+-- a)  Liste o nome dos clientes, os produtos que compraram e a data da venda. Inclua apenas os clientes que realizaram compras.
+SELECT c.nome AS cliente_nome, p.nome AS produto_nome, v.data_venda
+FROM clientes c
+INNER JOIN vendas v ON c.id = v.cliente_id
+INNER JOIN produtos p ON v.produto_id = p.produto_id;
+
+-- b)  Liste todos os produtos, incluindo a quantidade disponível no estoque e o nome do fornecedor. Para produtos que não têm fornecedor associado no estoque, mostre NULL.
+SELECT p.nome AS produto_nome, 
+       e.quantidade_disponivel, 
+       f.nome AS fornecedor_nome
+FROM produtos p
+LEFT JOIN estoque e ON p.produto_id = e.produto_id
+LEFT JOIN fornecedor f ON e.fornecedor_id = f.fornecedor_id;
+
+-- c)  Crie uma lista de combinação entre todos os fornecedores e produtos. A lista deve exibir o nome do fornecedor e o nome do produto.
+SELECT f.nome AS fornecedor_nome, 
+       p.nome AS produto_nome
+FROM fornecedor f
+CROSS JOIN produtos p;
+
