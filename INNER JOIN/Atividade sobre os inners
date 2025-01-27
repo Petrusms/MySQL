@@ -1,0 +1,54 @@
+CREATE DATABASE loja;
+USE loja;
+
+CREATE TABLE clientes (
+    id INT PRIMARY KEY,
+    nome VARCHAR(40) NOT NULL,
+    cidade VARCHAR(50)
+);
+
+CREATE TABLE pedidos (
+    id INT PRIMARY KEY,
+    valor FLOAT,
+    cliente_id INT,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+INSERT INTO clientes (id, nome, cidade)
+VALUES 
+(1, 'Ana', 'SP'),
+(2, 'Bruno', 'RJ'),
+(3, 'Carla', 'CWB'),
+(4, 'Daniel', 'PE');
+
+INSERT INTO pedidos (id, valor, cliente_id)
+VALUES 
+(101, 300, 1),
+(102, 400, 2),
+(103, 1000, 2);
+
+
+    -- a) Consulta para exibir o nome dos clientes e os valores de seus pedidos, mostrando apenas os clientes que têm pedidos registrados.
+SELECT c.nome, p.valor
+FROM clientes c
+INNER JOIN pedidos p ON c.id = p.cliente_id;
+
+-- b) Consulta para listar todos os clientes e, caso tenham pedidos, exibir os valores correspondentes. Caso não tenham pedidos, o valor deve aparecer como NULL.
+SELECT c.nome, p.valor
+FROM clientes c
+LEFT JOIN pedidos p ON c.id = p.cliente_id;
+
+-- c) Consulta que mostra todos os pedidos, incluindo aqueles cujo cliente não está registrado na tabela de clientes.
+SELECT p.id AS pedido_id, p.valor, c.nome
+FROM pedidos p
+LEFT JOIN clientes c ON p.cliente_id = c.id;
+
+-- d) Consulta usando FULL JOIN para exibir todas as combinações possíveis entre clientes e pedidos, incluindo dados incompletos de ambos os lados.
+SELECT c.nome, p.valor
+FROM clientes c
+FULL JOIN pedidos p ON c.id = p.cliente_id;
+
+-- e) Consulta usando CROSS JOIN para combinar todos os clientes com todos os pedidos e exibir as colunas nome, pedido_id e valor.
+SELECT c.nome, p.id AS pedido_id, p.valor
+FROM clientes c
+CROSS JOIN pedidos p;
